@@ -8,9 +8,11 @@ import com.joma.appwitharchitecture.databinding.ActivityMainBinding
 val fragmentList = arrayOf("action", "result", "operations")
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
-    lateinit var viewModel: MainViewModel
+    val viewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+
     override fun initView() {
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         val adapter = PagerAdapter(supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
         initTab()
